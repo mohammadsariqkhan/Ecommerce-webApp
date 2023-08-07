@@ -13,10 +13,10 @@ export const fetchAllProductAsync = createAsyncThunk(
     return response.data;
   }
 );
-export const fetchProductsByFilterAsync = createAsyncThunk(
-  'product/fetchProductsByFilter',
-  async (filter) => {
-    const response = await  fetchProductsByFilter(filter);
+export const fetchProductsByFiltersAsync = createAsyncThunk(
+  'product/fetchProductsByFilters',
+  async ({filter,sort}) => {
+    const response = await  fetchProductsByFilter(filter,sort);
     return response.data;
   }
 );
@@ -40,10 +40,10 @@ export const productSlice = createSlice({
         state.status = 'idle';
         state.products = action.payload;
       })
-      .addCase(fetchProductsByFilterAsync.pending, (state) => {
+      .addCase(fetchProductsByFiltersAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchProductsByFilterAsync.fulfilled, (state, action) => {
+      .addCase(fetchProductsByFiltersAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.products = action.payload;
       });
