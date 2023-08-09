@@ -4,7 +4,7 @@ import {checkUser, createUser} from './authAPI';
 const initialState = {
     loggedInUser: null,
     status: 'idle',
-    error:null
+    error: null
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -39,28 +39,25 @@ export const counterSlice = createSlice({
             })
             .addCase(createUserAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
-                console.log("work in progress")
-                state.loggedInUser += action.payload;
+                state.loggedInUser = action.payload;
             })
             .addCase(checkUserAsync.pending, (state) => {
                 state.status = 'loading';
             })
             .addCase(checkUserAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
-
-                state.loggedInUser += action.payload;
+                state.loggedInUser = action.payload;
             })
             .addCase(checkUserAsync.rejected, (state, action) => {
                 state.status = 'idle';
-
-                state.error += action.error;
+                state.error = action.error;
             });
     },
 });
 
 export const {increment} = counterSlice.actions;
-export const selectLoggedInUser = (state) => state.auth.loggedInUser;
-export const selectError = (state) => state.auth.error;
+export const selectLoggedInUser = (state)=>state.auth.loggedInUser;
+export const selectError = (state)=>state.auth.error;
 
 
 export default counterSlice.reducer;
