@@ -2333,5 +2333,17 @@
       "label": "lighting",
       "checked": false
     }
+  ],
+  "users": [
+    {
+      "email": "mohsariqkhan2004@gmail.com",
+      "password": "Qwert@123",
+      "id": 1
+    },
+    {
+      "email": "mohsariqkhan2004@gmail.com",
+      "password": "Qwert@123",
+      "id": 2
+    }
   ]
 }
