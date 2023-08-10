@@ -4,7 +4,7 @@ import {RadioGroup} from "@headlessui/react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllProductByIdAsync, selectProductById} from "../productSlice";
 import {fetchProductById} from "../productAPI";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {addToCartAsync} from "../../cart/cartSlice";
 import {selectLoggedInUser} from "../../auth/authSlice";
 
@@ -42,11 +42,15 @@ export default function ProductDetail() {
     const params = useParams()
     const dispatch = useDispatch()
     const user = useSelector(selectLoggedInUser)
+    const navigate = useNavigate()
 
 
-    const handleCart = (e)=>{
+    const handleCart = (e) => {
         e.preventDefault();
-        dispatch(addToCartAsync({...product,quantity:1,user:user.id }))
+        const newItem = {...product, quantity: 1, user: user.id}
+        delete newItem['id']
+        dispatch(addToCartAsync(newItem))
+        navigate('/cart')
     }
     useEffect(() => {
         dispatch(fetchAllProductByIdAsync(params.id))
