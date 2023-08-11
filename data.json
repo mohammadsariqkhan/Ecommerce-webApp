@@ -2434,5 +2434,235 @@
       "user": 1,
       "id": 94
     }
+  ],
+  "orders": [
+    {
+      "items": [
+        {
+          "id": 85,
+          "title": "LouisWill Men Sunglasses",
+          "description": "LouisWill Men Sunglasses Polarized Sunglasses UV400 Sunglasses Day Night Dual Use Safety Driving Night Vision Eyewear AL-MG Frame Sun Glasses with Free Box for Drivers",
+          "price": 50,
+          "discountPercentage": 11.27,
+          "rating": 4.98,
+          "stock": 92,
+          "brand": "LouisWill",
+          "category": "sunglasses",
+          "thumbnail": "https://i.dummyjson.com/data/products/85/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/85/1.jpg",
+            "https://i.dummyjson.com/data/products/85/2.jpg",
+            "https://i.dummyjson.com/data/products/85/thumbnail.jpg"
+          ],
+          "quantity": 5,
+          "user": 1
+        },
+        {
+          "id": 92,
+          "title": "HOT SALE IN EUROPE electric racing motorcycle",
+          "description": "HOT SALE IN EUROPE electric racing motorcycle electric motorcycle for sale adult electric motorcycles",
+          "price": 920,
+          "discountPercentage": 14.4,
+          "rating": 4.19,
+          "stock": 22,
+          "brand": "BRAVE BULL",
+          "category": "motorcycle",
+          "thumbnail": "https://i.dummyjson.com/data/products/92/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/92/1.jpg",
+            "https://i.dummyjson.com/data/products/92/2.jpg",
+            "https://i.dummyjson.com/data/products/92/3.jpg",
+            "https://i.dummyjson.com/data/products/92/4.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        },
+        {
+          "title": "Kabir Singh Square Sunglass",
+          "description": "Orignal Metal Kabir Singh design 2020 Sunglasses Men Brand Designer Sun Glasses Kabir Singh Square Sunglass",
+          "price": 50,
+          "discountPercentage": 15.6,
+          "rating": 4.62,
+          "stock": 78,
+          "brand": "Designer Sun Glasses",
+          "category": "sunglasses",
+          "thumbnail": "https://i.dummyjson.com/data/products/82/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/82/1.jpg",
+            "https://i.dummyjson.com/data/products/82/2.webp",
+            "https://i.dummyjson.com/data/products/82/3.jpg",
+            "https://i.dummyjson.com/data/products/82/4.jpg",
+            "https://i.dummyjson.com/data/products/82/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 93
+        },
+        {
+          "title": "Microsoft Surface Laptop 4",
+          "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
+          "price": 1499,
+          "discountPercentage": 10.23,
+          "rating": 4.43,
+          "stock": 68,
+          "brand": "Microsoft Surface",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/8/1.jpg",
+            "https://i.dummyjson.com/data/products/8/2.jpg",
+            "https://i.dummyjson.com/data/products/8/3.jpg",
+            "https://i.dummyjson.com/data/products/8/4.jpg",
+            "https://i.dummyjson.com/data/products/8/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 94
+        }
+      ],
+      "totalAmount": 2719,
+      "totalItems": 8,
+      "user": {
+        "email": "mohsariqkhan2004@gmail.com",
+        "password": "Qwert@123",
+        "addresses": [
+          {
+            "name": "Mohammad",
+            "email": "mohsariqkhan2004@gmail.com",
+            "phone": "7987888025",
+            "street": "B-112 Patel nagar Block B Patel nagar",
+            "city": "Bhopal",
+            "region": "Madhya Pradesh",
+            "pincode": "462022"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "Mohammad",
+        "email": "mohsariqkhan2004@gmail.com",
+        "phone": "7987888025",
+        "street": "B-112 Patel nagar Block B Patel nagar",
+        "city": "Bhopal",
+        "region": "Madhya Pradesh",
+        "pincode": "462022"
+      },
+      "id": 1
+    },
+    {
+      "items": [
+        {
+          "id": 85,
+          "title": "LouisWill Men Sunglasses",
+          "description": "LouisWill Men Sunglasses Polarized Sunglasses UV400 Sunglasses Day Night Dual Use Safety Driving Night Vision Eyewear AL-MG Frame Sun Glasses with Free Box for Drivers",
+          "price": 50,
+          "discountPercentage": 11.27,
+          "rating": 4.98,
+          "stock": 92,
+          "brand": "LouisWill",
+          "category": "sunglasses",
+          "thumbnail": "https://i.dummyjson.com/data/products/85/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/85/1.jpg",
+            "https://i.dummyjson.com/data/products/85/2.jpg",
+            "https://i.dummyjson.com/data/products/85/thumbnail.jpg"
+          ],
+          "quantity": 5,
+          "user": 1
+        },
+        {
+          "id": 92,
+          "title": "HOT SALE IN EUROPE electric racing motorcycle",
+          "description": "HOT SALE IN EUROPE electric racing motorcycle electric motorcycle for sale adult electric motorcycles",
+          "price": 920,
+          "discountPercentage": 14.4,
+          "rating": 4.19,
+          "stock": 22,
+          "brand": "BRAVE BULL",
+          "category": "motorcycle",
+          "thumbnail": "https://i.dummyjson.com/data/products/92/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/92/1.jpg",
+            "https://i.dummyjson.com/data/products/92/2.jpg",
+            "https://i.dummyjson.com/data/products/92/3.jpg",
+            "https://i.dummyjson.com/data/products/92/4.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        },
+        {
+          "title": "Kabir Singh Square Sunglass",
+          "description": "Orignal Metal Kabir Singh design 2020 Sunglasses Men Brand Designer Sun Glasses Kabir Singh Square Sunglass",
+          "price": 50,
+          "discountPercentage": 15.6,
+          "rating": 4.62,
+          "stock": 78,
+          "brand": "Designer Sun Glasses",
+          "category": "sunglasses",
+          "thumbnail": "https://i.dummyjson.com/data/products/82/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/82/1.jpg",
+            "https://i.dummyjson.com/data/products/82/2.webp",
+            "https://i.dummyjson.com/data/products/82/3.jpg",
+            "https://i.dummyjson.com/data/products/82/4.jpg",
+            "https://i.dummyjson.com/data/products/82/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 93
+        },
+        {
+          "title": "Microsoft Surface Laptop 4",
+          "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
+          "price": 1499,
+          "discountPercentage": 10.23,
+          "rating": 4.43,
+          "stock": 68,
+          "brand": "Microsoft Surface",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/8/1.jpg",
+            "https://i.dummyjson.com/data/products/8/2.jpg",
+            "https://i.dummyjson.com/data/products/8/3.jpg",
+            "https://i.dummyjson.com/data/products/8/4.jpg",
+            "https://i.dummyjson.com/data/products/8/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 94
+        }
+      ],
+      "totalAmount": 2719,
+      "user": {
+        "email": "mohsariqkhan2004@gmail.com",
+        "password": "Qwert@123",
+        "addresses": [
+          {
+            "name": "Mohammad",
+            "email": "mohsariqkhan2004@gmail.com",
+            "phone": "7987888025",
+            "street": "B-112 Patel nagar Block B Patel nagar",
+            "city": "Bhopal",
+            "region": "Madhya Pradesh",
+            "pincode": "462022"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Mohammad",
+        "email": "mohsariqkhan2004@gmail.com",
+        "phone": "7987888025",
+        "street": "B-112 Patel nagar Block B Patel nagar",
+        "city": "Bhopal",
+        "region": "Madhya Pradesh",
+        "pincode": "462022"
+      },
+      "status": "pending",
+      "id": 2
+    }
   ]
 }

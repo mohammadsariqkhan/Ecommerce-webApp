@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {deleteItemFromCartAsync, selectItems, updateItemAsync} from "../features/cart/cartSlice";
 import {useForm} from "react-hook-form";
 import {checkUserAsync, selectLoggedInUser, updateUserAsync} from "../features/auth/authSlice";
+import {createOrderAsync, selectCurrentOrder} from "../features/order/orderSlice";
 
 const CheckOut = () => {
     const dispatch = useDispatch();
@@ -12,23 +13,54 @@ const CheckOut = () => {
     const items = useSelector(selectItems)
     const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0)
     const totalItems = items.reduce((total, item) => item.quantity + total, 0)
-    const {handleSubmit, register, formState: {errors}} = useForm();
+    const {handleSubmit, register, formState: {errors}, reset} = useForm();
     const user = useSelector(selectLoggedInUser)
+    const [selectedAddress, setSelectedAddress] = useState(null)
+    const [paymentMethod, setPaymentMethod] = useState("cash")
+    const currentOrder = useSelector(selectCurrentOrder)
+
     const handleQuantity = (e, item) => {
         dispatch(updateItemAsync({...item, quantity: +e.target.value}))
     }
     const handleRemove = (e, id) => {
         dispatch(deleteItemFromCartAsync(id))
     }
-    return (
-        // <div className="mx-auto rounded-xl p-10 mt-24 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
+    const handleAddress = (e) => {
+        setSelectedAddress(user.addresses[e.target.value])
+    }
+    const handlePayment = (e) => {
+        console.log(paymentMethod)
+        setPaymentMethod(e.target.value)
+
+
+    }
+    const handleOrder = (e) => {
+        if (selectedAddress && paymentMethod) {
+            const order = {
+                items,
+                totalAmount,
+                user,
+                paymentMethod,
+                selectedAddress,
+                status: 'pending'
+            }
+            dispatch(createOrderAsync(order))
+        } else {
+            alert("enter address and payment method");
+        }
+
+
+    }
+    return (// <div className="mx-auto rounded-xl p-10 mt-24 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
         <>
             {!items.length && <Navigate to='/' replace={true}></Navigate>}
+            {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} replace={true}></Navigate>}
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
                     <div className="lg:col-span-3">
                         <form noValidate className="bg-white px-10 py-8" onSubmit={handleSubmit((data) => {
-                            dispatch(updateUserAsync({...user,addresses:[...user.addresses,data]}))
+                            dispatch(updateUserAsync({...user, addresses: [...user.addresses, data]}))
+                            reset()
                         })}>
                             <div className="space-y-12">
                                 <div className="border-b border-gray-900/10 pb-12">
@@ -192,37 +224,37 @@ const CheckOut = () => {
                                     Choose from Existing Address
                                 </p>
                                 <ul role="list">
-                                    {user.addresses.map((address) => (
-                                        <li
-                                            key={address.email}
-                                            className="flex justify-between gap-x-6 py-5"
-                                        >
-                                            <div className="flex gap-x-4">
-                                                <input
-                                                    name="address"
-                                                    type="radio"
-                                                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                                />
+                                    {user.addresses.map((address, index) => (<li
+                                        key={index}
+                                        className="flex justify-between gap-x-6 py-5"
+                                    >
+                                        <div className="flex gap-x-4">
+                                            <input
+                                                name="address"
+                                                type="radio"
+                                                onClick={handleAddress}
+                                                value={index}
+                                                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                            />
 
-                                                <div className="min-w-0 flex-auto">
-                                                    <p className="text-sm font-semibold leading-6 text-gray-900">
-                                                        {address.name}
-                                                    </p>
-                                                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                                        {address.street}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className="hidden sm:flex sm:flex-col sm:items-end">
-                                                <p className="text-sm leading-6 text-gray-500">
-                                                    Phone:{address.phone}
+                                            <div className="min-w-0 flex-auto">
+                                                <p className="text-sm font-semibold leading-6 text-gray-900">
+                                                    {address.name}
                                                 </p>
-                                                <p className="text-sm leading-6 text-gray-500">
-                                                    {address.pinCode}
+                                                <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                                    {address.street}
                                                 </p>
                                             </div>
-                                        </li>
-                                    ))}
+                                        </div>
+                                        <div className="hidden sm:flex sm:flex-col sm:items-end">
+                                            <p className="text-sm leading-6 text-gray-500">
+                                                Phone:{address.phone}
+                                            </p>
+                                            <p className="text-sm leading-6 text-gray-500">
+                                                {address.pinCode}
+                                            </p>
+                                        </div>
+                                    </li>))}
                                 </ul>
 
                                 <div className="mt-10 space-y-10">
@@ -238,7 +270,11 @@ const CheckOut = () => {
                                                 <input
                                                     id="cash"
                                                     name="payments"
+
+                                                    value="cash"
                                                     type="radio"
+                                                    checked={paymentMethod === 'cash'}
+                                                    onChange={handlePayment}
                                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                 />
                                                 <label
@@ -252,6 +288,10 @@ const CheckOut = () => {
                                                 <input
                                                     id="card"
                                                     name="payments"
+                                                    value="card"
+                                                    checked={paymentMethod === 'card'}
+                                                    onChange={handlePayment}
+
                                                     type="radio"
                                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                 />
@@ -274,62 +314,60 @@ const CheckOut = () => {
                             <div className="mt-8">
                                 <div className="flow-root">
                                     <ul role="list" className="-my-6 divide-y divide-gray-200">
-                                        {items.map((item) => (
-                                            <li key={item.id} className="flex py-6">
-                                                <div
-                                                    className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                    <img
-                                                        src={item.thumbnail}
-                                                        alt={item.title}
-                                                        className="h-full w-full object-cover object-center"
-                                                    />
-                                                </div>
+                                        {items.map((item) => (<li key={item.id} className="flex py-6">
+                                            <div
+                                                className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                <img
+                                                    src={item.thumbnail}
+                                                    alt={item.title}
+                                                    className="h-full w-full object-cover object-center"
+                                                />
+                                            </div>
 
-                                                <div className="ml-4 flex flex-1 flex-col">
-                                                    <div>
-                                                        <div
-                                                            className="flex justify-between text-base font-medium text-gray-900">
-                                                            <h3>
-                                                                <a href={item.href}>{item.title}</a>
-                                                            </h3>
-                                                            <p className="ml-4">${item.price}</p>
-                                                        </div>
-                                                        <p className="mt-1 text-sm text-gray-500">
-                                                            {item.brand}
-                                                        </p>
+                                            <div className="ml-4 flex flex-1 flex-col">
+                                                <div>
+                                                    <div
+                                                        className="flex justify-between text-base font-medium text-gray-900">
+                                                        <h3>
+                                                            <a href={item.href}>{item.title}</a>
+                                                        </h3>
+                                                        <p className="ml-4">${item.price}</p>
                                                     </div>
-                                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                                        <div className="text-gray-500">
-                                                            <label
-                                                                htmlFor="quantity"
-                                                                className="inline mr-5 text-sm font-medium leading-6 text-gray-900"
-                                                            >
-                                                                Qty
-                                                            </label>
+                                                    <p className="mt-1 text-sm text-gray-500">
+                                                        {item.brand}
+                                                    </p>
+                                                </div>
+                                                <div className="flex flex-1 items-end justify-between text-sm">
+                                                    <div className="text-gray-500">
+                                                        <label
+                                                            htmlFor="quantity"
+                                                            className="inline mr-5 text-sm font-medium leading-6 text-gray-900"
+                                                        >
+                                                            Qty
+                                                        </label>
 
-                                                            <select value={item.quantity}
-                                                                    onChange={(e) => handleQuantity(e, item)}>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="2">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                            </select>
-                                                        </div>
+                                                        <select value={item.quantity}
+                                                                onChange={(e) => handleQuantity(e, item)}>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="2">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
 
-                                                        <div className="flex">
-                                                            <button
-                                                                onClick={(e) => handleRemove(e, item.id)}
-                                                                type="button"
-                                                                className="font-medium text-indigo-600 hover:text-indigo-500"
-                                                            >
-                                                                Remove
-                                                            </button>
-                                                        </div>
+                                                    <div className="flex">
+                                                        <button
+                                                            onClick={(e) => handleRemove(e, item.id)}
+                                                            type="button"
+                                                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                        >
+                                                            Remove
+                                                        </button>
                                                     </div>
                                                 </div>
-                                            </li>
-                                        ))}
+                                            </div>
+                                        </li>))}
                                     </ul>
                                 </div>
                             </div>
@@ -347,11 +385,12 @@ const CheckOut = () => {
                                     Shipping and taxes calculated at checkout.
                                 </p>
                                 <div className="mt-6">
-                                    <Link to="/checkout"
-                                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                                    <div
+                                        onClick={handleOrder}
+                                        className="flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                                     >
-                                        Checkout
-                                    </Link>
+                                        Order Now
+                                    </div>
                                 </div>
                                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>
@@ -374,8 +413,7 @@ const CheckOut = () => {
                     </div>
                 </div>
             </div>
-        </>
-    )
+        </>)
 
 };
 
