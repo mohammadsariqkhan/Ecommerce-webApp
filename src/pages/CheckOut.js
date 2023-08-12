@@ -29,7 +29,7 @@ const CheckOut = () => {
         setSelectedAddress(user.addresses[e.target.value])
     }
     const handlePayment = (e) => {
-        console.log(paymentMethod)
+
         setPaymentMethod(e.target.value)
 
 

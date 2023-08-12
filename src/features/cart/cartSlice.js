@@ -1,43 +1,33 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {addToCart, deleteItem, fetchCount, fetchItemsByUserId, updateCart} from './cartAPI';
+import {addToCart, deleteItem, fetchCount, fetchItemsByUserId, resetCart, updateCart} from './cartAPI';
 
 const initialState = {
-    items: [],
-    status: 'idle',
+    items: [], status: 'idle',
 };
 
-export const addToCartAsync = createAsyncThunk(
-    'cart/addToCart',
-    async (item) => {
-        const response = await addToCart(item);
-        return response.data;
-    }
-);
-export const fetchItemsByUserIdAsync = createAsyncThunk(
-    'cart/fetchItemsByUserId',
-    async (userId) => {
-        const response = await fetchItemsByUserId(userId);
-        return response.data;
-    }
-);
-export const updateItemAsync = createAsyncThunk(
-    'cart/updateCart',
-    async (update) => {
-        const response = await updateCart(update);
-        return response.data;
-    }
-);
-export const deleteItemFromCartAsync = createAsyncThunk(
-    'cart/deleteItem',
-    async (itemId) => {
-        const response = await deleteItem(itemId);
-        return response.data;
-    }
-);
+export const addToCartAsync = createAsyncThunk('cart/addToCart', async (item) => {
+    const response = await addToCart(item);
+    return response.data;
+});
+export const fetchItemsByUserIdAsync = createAsyncThunk('cart/fetchItemsByUserId', async (userId) => {
+    const response = await fetchItemsByUserId(userId);
+    return response.data;
+});
+export const updateItemAsync = createAsyncThunk('cart/updateCart', async (update) => {
+    const response = await updateCart(update);
+    return response.data;
+});
+export const deleteItemFromCartAsync = createAsyncThunk('cart/deleteItem', async (itemId) => {
+    const response = await deleteItem(itemId);
+    return response.data;
+});
+export const resetCartAsync = createAsyncThunk('cart/resetCart', async (userId) => {
+    const response = await resetCart(userId);
+    return response.data;
+});
 
 export const counterSlice = createSlice({
-    name: 'cart',
-    initialState,
+    name: 'cart', initialState,
 
     reducers: {
         increment: (state) => {
@@ -75,7 +65,15 @@ export const counterSlice = createSlice({
             .addCase(deleteItemFromCartAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
                 const index = state.items.findIndex(item => item.id === action.payload.id)
-                state.items.splice(index,1);
+                state.items.splice(index, 1);
+            })
+            .addCase(resetCartAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(resetCartAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                state.items = [];
+
             })
     },
 });
