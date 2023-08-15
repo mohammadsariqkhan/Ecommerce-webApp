@@ -6,6 +6,7 @@ import {deleteItemFromCartAsync, selectItems, updateItemAsync} from "../features
 import {useForm} from "react-hook-form";
 import {checkUserAsync, selectLoggedInUser, updateUserAsync} from "../features/auth/authSlice";
 import {createOrderAsync, selectCurrentOrder} from "../features/order/orderSlice";
+import {selectUserInfo} from "../features/user/userSlice";
 
 const CheckOut = () => {
     const dispatch = useDispatch();

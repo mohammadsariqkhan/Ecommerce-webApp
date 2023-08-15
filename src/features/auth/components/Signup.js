@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {createUserAsync, selectLoggedInUser} from "../authSlice";
 import {Link, Navigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
+import {selectUserInfo} from "../../user/userSlice";
 
 export default function Signup() {
     // const count = useSelector(selectCount);
