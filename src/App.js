@@ -1,12 +1,5 @@
 import React, {useEffect} from 'react';
-
-import {createRoot} from "react-dom/client";
-import {
-    createBrowserRouter,
-    RouterProvider,
-    Route,
-    Link, useNavigate
-} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -19,17 +12,24 @@ import {fetchItemsByUserIdAsync} from "./features/cart/cartSlice";
 import {selectLoggedInUser} from "./features/auth/authSlice";
 import PageNoFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
-import User from "./features/user/components/User";
 import UserOrders from "./features/user/components/UserOrders";
-import UserProfile from "./features/user/components/UserProfile";
 import UserProfilePage from "./pages/UserProfilePage";
 import {fetchLoggedInUserAsync} from "./features/user/userSlice";
+import LogOut from "./features/auth/components/LogOut";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
+import AdminHome from "./pages/AdminProductListPage";
+import AdminProductDetailPage from "./pages/AdmiinProductDetailPage";
 
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Protected><Home></Home></Protected>,
+    },
+    {
+        path: "/admin",
+        element: <ProtectedAdmin><AdminHome></AdminHome></ProtectedAdmin>,
     },
     {
         path: "/login",
@@ -49,7 +49,11 @@ const router = createBrowserRouter([
     },
     {
         path: "/product-detail/:id",
-        element: <Protected> <ProductDetailPage></ProductDetailPage></Protected>,
+        element: <Protected><ProductDetailPage></ProductDetailPage></Protected>,
+    },
+    {
+        path: "/admin/product-detail/:id",
+        element: <ProtectedAdmin> <AdminProductDetailPage></AdminProductDetailPage></ProtectedAdmin>,
     },
     {
         path: "/order-success/:id",
@@ -62,6 +66,14 @@ const router = createBrowserRouter([
     {
         path: "/profile",
         element: <UserProfilePage></UserProfilePage>
+    },
+    {
+        path: "/resetpassword",
+        element: <ResetPasswordPage></ResetPasswordPage>
+    },
+    {
+        path: "/logout",
+        element: <LogOut></LogOut>
     },
     {
         path: "*",

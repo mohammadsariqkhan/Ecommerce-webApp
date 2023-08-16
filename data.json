@@ -2338,6 +2338,7 @@
     {
       "email": "mohsariqkhan2004@gmail.com",
       "password": "Qwert@123",
+      "role": "user",
       "addresses": [
         {
           "name": "Mohammad",
@@ -2352,42 +2353,18 @@
       "id": 1
     },
     {
-      "email": "hello@gmail.com",
-      "password": "Asdfg@123",
-      "addresses": [
-        {
-          "name": "Mohammad",
-          "email": "mohsariqkhan2004@gmail.com",
-          "phone": "7987888025",
-          "street": "B-112 Patel nagar Block B Patel nagar",
-          "city": "Bhopal",
-          "region": "Madhya Pradesh",
-          "pincode": "462022"
-        }
-      ],
+      "email": "sariqkhan2004@gmail.com",
+      "password": "Sariqkhan@123",
+      "addresses": [],
+      "role": "admin",
       "id": 2
     },
     {
-      "email": "mohsariqkhan2004@gmail.com",
-      "password": "Qwert@123",
+      "email": "hello@gmail.com",
+      "password": "Hello@12345",
       "addresses": [],
+      "role": "user",
       "id": 3
-    },
-    {
-      "email": "sariq123@gmail.com",
-      "password": "Sariq123@",
-      "addresses": [
-        {
-          "name": "sariq",
-          "email": "sariq123@gmail.com",
-          "phone": "9575554253",
-          "street": "New Market",
-          "city": "Bhopal",
-          "region": "Madhya Pradesh",
-          "pincode": "462022"
-        }
-      ],
-      "id": 4
     }
   ],
   "cart": [
@@ -2410,6 +2387,67 @@
       "quantity": 1,
       "user": 3,
       "id": 1
+    },
+    {
+      "title": "iPhone X",
+      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+      "price": 899,
+      "discountPercentage": 17.94,
+      "rating": 4.44,
+      "stock": 34,
+      "brand": "Apple",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/2/1.jpg",
+        "https://i.dummyjson.com/data/products/2/2.jpg",
+        "https://i.dummyjson.com/data/products/2/3.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "user": 2,
+      "id": 2
+    },
+    {
+      "title": "MacBook Pro",
+      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+      "price": 1749,
+      "discountPercentage": 11.02,
+      "rating": 4.57,
+      "stock": 83,
+      "brand": "Apple",
+      "category": "laptops",
+      "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+      "images": [
+        "https://i.dummyjson.com/data/products/6/1.png",
+        "https://i.dummyjson.com/data/products/6/2.jpg",
+        "https://i.dummyjson.com/data/products/6/3.png",
+        "https://i.dummyjson.com/data/products/6/4.jpg"
+      ],
+      "quantity": 1,
+      "user": 2,
+      "id": 3
+    },
+    {
+      "title": "Infinix INBOOK",
+      "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+      "price": 1099,
+      "discountPercentage": 11.83,
+      "rating": 4.54,
+      "stock": 96,
+      "brand": "Infinix",
+      "category": "laptops",
+      "thumbnail": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/9/1.jpg",
+        "https://i.dummyjson.com/data/products/9/2.png",
+        "https://i.dummyjson.com/data/products/9/3.png",
+        "https://i.dummyjson.com/data/products/9/4.jpg",
+        "https://i.dummyjson.com/data/products/9/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "user": 2,
+      "id": 4
     }
   ],
   "orders": [

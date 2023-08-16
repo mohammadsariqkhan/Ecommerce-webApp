@@ -1,9 +1,8 @@
-import React, {useState} from "react";
-import {useSelector, useDispatch} from "react-redux";
+import React from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {createUserAsync, selectLoggedInUser} from "../authSlice";
 import {Link, Navigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {selectUserInfo} from "../../user/userSlice";
 
 export default function Signup() {
     // const count = useSelector(selectCount);
@@ -28,7 +27,7 @@ export default function Signup() {
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form noValidate className="space-y-6" onSubmit={handleSubmit((data) => {
 
-                    dispatch(createUserAsync({email: data.email, password: data.password,addresses:[]}))
+                    dispatch(createUserAsync({email: data.email, password: data.password, addresses: [], role: 'user'}))
                 })}>
                     <div>
                         <label
@@ -63,12 +62,10 @@ export default function Signup() {
                                 Password
                             </label>
                             <div className="text-sm">
-                                <a
-                                    href="#"
-                                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                                >
+                                <Link to='/resetpassword'
+                                      className="font-semibold text-indigo-600 hover:text-indigo-500">
                                     Forgot password?
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="mt-2">
