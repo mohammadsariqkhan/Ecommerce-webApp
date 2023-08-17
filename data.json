@@ -1838,6 +1838,24 @@
         "https://i.dummyjson.com/data/products/100/3.jpg",
         "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
       ]
+    },
+    {
+      "title": "Mac book Air",
+      "description": "it is type of laptop",
+      "brand": "Apple",
+      "category": "laptops",
+      "price": "9999",
+      "discountPercentage": "10",
+      "stock": "2",
+      "thumbnail": "no",
+      "images": [
+        "no",
+        "no",
+        "no",
+        "no"
+      ],
+      "rating": 0,
+      "id": 101
     }
   ],
   "brands": [

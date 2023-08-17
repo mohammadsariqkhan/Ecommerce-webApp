@@ -20,6 +20,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
 import AdminHome from "./pages/AdminProductListPage";
 import AdminProductDetailPage from "./pages/AdmiinProductDetailPage";
+import AdminProductFormPage from "./pages/AdminProductFormPage";
 
 
 const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
     {
         path: "/admin/product-detail/:id",
         element: <ProtectedAdmin> <AdminProductDetailPage></AdminProductDetailPage></ProtectedAdmin>,
+    },
+    {
+        path: "/admin/product-form",
+        element: <ProtectedAdmin> <AdminProductFormPage></AdminProductFormPage></ProtectedAdmin>,
     },
     {
         path: "/order-success/:id",
