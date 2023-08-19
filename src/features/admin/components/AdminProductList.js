@@ -566,14 +566,16 @@ function ProductGrid({products}) {
                                                 </p>
                                             </div>
                                         </div>
-
+                                        {product.deleted && <div>
+                                            <p>Product Deleted</p>
+                                        </div>}
                                     </div>
                                 </Link>
-                                <div>
-                                    <button
-                                        className='rounded-md my-3 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Edit
+                                <div className="mt-3">
+                                    <Link to={`/admin/product-form/edit/${product.id}`}
+                                          className='rounded-md my-3 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Edit
                                         Product
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         ))}

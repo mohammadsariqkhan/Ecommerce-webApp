@@ -1,13 +1,57 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {createProductAsync, selectBrands, selectCategories} from "../../product-list/productSlice";
+import {
+    clearSelectedProduct,
+    createProductAsync,
+    fetchProductByIdAsync,
+    selectBrands,
+    selectCategories,
+    selectProductById,
+    updateProductAsync
+} from "../../product-list/productSlice";
 import {useForm} from "react-hook-form";
+import {useParams} from "react-router-dom";
 
 function ProdcutForm(props) {
     const dispatch = useDispatch()
     const brands = useSelector(selectBrands)
     const categories = useSelector(selectCategories)
-    const {handleSubmit, register, formState: {errors}, reset} = useForm();
+    const params = useParams()
+    // const selectedProduct = useSelector(selectProductById)
+    const selectedProduct = useSelector(selectProductById)
+    const handleDelete = () => {
+        const product = {
+            ...selectedProduct
+        }
+        product.deleted = true
+        dispatch(updateProductAsync(product))
+
+    }
+
+    const {handleSubmit, register, formState: {errors}, reset, setValue} = useForm();
+    useEffect(() => {
+        if (params.id) {
+            dispatch(fetchProductByIdAsync(params.id));
+        } else {
+            dispatch(clearSelectedProduct())
+            //TODO: on product succeessfully added cleaar fields and show a message
+        }
+    }, [params.id, dispatch]);
+    useEffect(() => {
+        if (selectedProduct && params.id) {
+            setValue('title', selectedProduct.title)
+            setValue('description', selectedProduct.description)
+            setValue('price', selectedProduct.price)
+            setValue('discountPercentage', selectedProduct.discountPercentage)
+            setValue('thumbnail', selectedProduct.thumbnail)
+            setValue('stock', selectedProduct.stock)
+            setValue('image1', selectedProduct.images[0])
+            setValue('image2', selectedProduct.images[1])
+            setValue('image3', selectedProduct.images[2])
+            setValue('brand', selectedProduct.brand)
+            setValue('category', selectedProduct.category)
+        }
+    }, [selectedProduct, setValue])
     return (
         <form noValidate onSubmit={handleSubmit((data) => {
             console.log(data)
@@ -17,10 +61,20 @@ function ProdcutForm(props) {
             delete product.image1
             delete product.image2
             delete product.image3
-            console.log(product)
-            dispatch(
-                createProductAsync(product)
-            )
+            product.price = +product.price
+            product.discountPercentage = +product.discountPercentage
+            product.stock = +product.stock
+            if (params.id) {
+                product.id = params.id
+                product.rating = selectedProduct.rating || 0
+                dispatch(updateProductAsync(product))
+                reset()
+            } else {
+                dispatch(
+                    createProductAsync(product)
+                )
+            }
+
 
         })}>
             <div className="space-y-12 bg-white p-12">
@@ -37,8 +91,8 @@ function ProdcutForm(props) {
                                     className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
 
                                     <input type="text" {...register('title', {
-                                        required: 'name is required',
-                                    })} id="title" autoComplete="username"
+                                        required: 'title',
+                                    })} id="title"
                                            className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                     />
                                 </div>
@@ -280,9 +334,11 @@ function ProdcutForm(props) {
                     </div>
                 </div>
             </div>
-
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                {selectedProduct && <button onClick={handleDelete}
+                                            className="rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Delete
+                </button>}
                 <button type="submit"
                         class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save
                 </button>
