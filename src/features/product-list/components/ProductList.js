@@ -1,23 +1,25 @@
-import React, {useState, Fragment, useEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
+import React, {Fragment, useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {
-    increment,
-    incrementAsync,
-    selectAllProducts,
-    fetchAllProductAsync,
+    fetchBrandsAsync,
+    fetchCategoriesAsync,
     fetchProductsByFiltersAsync,
-    selectAllItems, selectBrands, selectCategories, fetchBrandsAsync, fetchCategoriesAsync,
+    selectAllItems,
+    selectAllProducts,
+    selectBrands,
+    selectCategories,
 } from "../productSlice";
 import {Dialog, Disclosure, Menu, Transition} from "@headlessui/react";
 import {StarIcon, XMarkIcon} from "@heroicons/react/24/outline";
 import {
     ChevronDownIcon,
+    ChevronLeftIcon,
+    ChevronRightIcon,
     FunnelIcon,
     MinusIcon,
     PlusIcon,
     Squares2X2Icon,
 } from "@heroicons/react/20/solid";
-import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/20/solid";
 import {Link} from "react-router-dom";
 import {ITEMS_PER_PAGE} from "../../../app/const";
 
@@ -397,6 +399,10 @@ function DestopFilter({handleFilter, filters}) {
                                                 defaultValue={option.value}
                                                 type="checkbox"
                                                 defaultChecked={option.checked}
+                                                onChange={(e) =>
+                                                    handleFilter(e, section, option)
+                                                }
+
                                                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                             />
                                             <label
