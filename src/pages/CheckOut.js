@@ -1,12 +1,10 @@
 import React, {useState} from "react";
-import Cart from "../features/cart/Cart";
 import {Link, Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteItemFromCartAsync, selectItems, updateItemAsync} from "../features/cart/cartSlice";
 import {useForm} from "react-hook-form";
-import {checkUserAsync, selectLoggedInUser, updateUserAsync} from "../features/auth/authSlice";
+import {selectLoggedInUser, updateUserAsync} from "../features/auth/authSlice";
 import {createOrderAsync, selectCurrentOrder} from "../features/order/orderSlice";
-import {selectUserInfo} from "../features/user/userSlice";
 
 const CheckOut = () => {
     const dispatch = useDispatch();
@@ -21,6 +19,7 @@ const CheckOut = () => {
     const currentOrder = useSelector(selectCurrentOrder)
 
     const handleQuantity = (e, item) => {
+        ///////////////////////////////////////////////////////////////
         dispatch(updateItemAsync({...item, quantity: +e.target.value}))
     }
     const handleRemove = (e, id) => {
@@ -40,7 +39,7 @@ const CheckOut = () => {
             const order = {
                 items,
                 totalAmount,
-                user,
+                user: user.id,
                 paymentMethod,
                 selectedAddress,
                 status: 'pending'
@@ -330,7 +329,7 @@ const CheckOut = () => {
                                                     <div
                                                         className="flex justify-between text-base font-medium text-gray-900">
                                                         <h3>
-                                                            <a href={item.href}>{item.title}</a>
+                                                            <a href={item.id}>{item.title}</a>
                                                         </h3>
                                                         <p className="ml-4">${item.price}</p>
                                                     </div>

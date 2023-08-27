@@ -1,15 +1,6 @@
-import {useSelector, useDispatch} from "react-redux";
-import {
-    deleteItemFromCartAsync,
-    increment,
-    incrementAsync,
-    selectCount,
-    selectItems,
-    updateItemAsync
-} from "./cartSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteItemFromCartAsync, selectItems, updateItemAsync} from "./cartSlice";
 import {Fragment, useState} from "react";
-import {Dialog, Transition} from "@headlessui/react";
-import {XMarkIcon} from "@heroicons/react/24/outline";
 import {Link, Navigate} from "react-router-dom";
 
 export default function Cart() {
@@ -20,14 +11,17 @@ export default function Cart() {
     const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0)
     const totalItems = items.reduce((total, item) => item.quantity + total, 0)
     const handleQuantity = (e, item) => {
-        dispatch(updateItemAsync({...item, quantity: +e.target.value}))
+        //////////////////////////////////////////////////...item
+
+        dispatch(updateItemAsync({id: item.id, quantity: +e.target.value}))
     }
-    const handleRemove = (e,id) => {
-            dispatch(deleteItemFromCartAsync(id))
+    const handleRemove = (e, id) => {
+        dispatch(deleteItemFromCartAsync(id))
     }
+
     return (
         <>
-            {!items.length&& <Navigate to='/' replace={true}></Navigate>}
+            {!items.length && <Navigate to='/' replace={true}></Navigate>}
             <div>
                 <div className="mx-auto mt-24 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
                     <h2 className="text-2xl">Cart</h2>
@@ -50,7 +44,7 @@ export default function Cart() {
                                                 <div
                                                     className="flex justify-between text-base font-medium text-gray-900">
                                                     <h3>
-                                                        <a href={item.href}>{item.title}</a>
+                                                        <a href={item.id}>{item.title}</a>
                                                     </h3>
                                                     <p className="ml-4">${item.price}</p>
                                                 </div>
@@ -67,10 +61,13 @@ export default function Cart() {
                                                         Qty
                                                     </label>
 
-                                                    <select value={item.quantity} onChange={(e) => handleQuantity(e, item)}>
+                                                    <select
+                                                        onChange={(e) => handleQuantity(e, item)}
+                                                        value={item.quantity}
+                                                    >
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
-                                                        <option value="2">3</option>
+                                                        <option value="3">3</option>
                                                         <option value="4">4</option>
                                                         <option value="5">5</option>
                                                     </select>
@@ -78,7 +75,7 @@ export default function Cart() {
 
                                                 <div className="flex">
                                                     <button
-                                                        onClick={(e) => handleRemove(e,item.id)}
+                                                        onClick={(e) => handleRemove(e, item.id)}
                                                         type="button"
                                                         className="font-medium text-indigo-600 hover:text-indigo-500"
                                                     >

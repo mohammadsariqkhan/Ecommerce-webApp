@@ -2,12 +2,10 @@ import {useEffect, useState} from "react";
 import {StarIcon} from "@heroicons/react/20/solid";
 import {RadioGroup} from "@headlessui/react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchAllProductByIdAsync, selectProductById} from "../productSlice";
-import {fetchProductById} from "../productAPI";
+import {fetchProductByIdAsync, selectProductById} from "../productSlice";
 import {useNavigate, useParams} from "react-router-dom";
 import {addToCartAsync} from "../../cart/cartSlice";
 import {selectLoggedInUser} from "../../auth/authSlice";
-import {selectUserInfo} from "../../user/userSlice";
 
 
 const colors = [
@@ -50,12 +48,11 @@ export default function ProductDetail() {
         e.preventDefault();
         navigate('/cart')
         const newItem = {...product, quantity: 1, user: user.id}
-        delete newItem['id']
         dispatch(addToCartAsync(newItem))
 
     }
     useEffect(() => {
-        dispatch(fetchAllProductByIdAsync(params.id))
+        dispatch(fetchProductByIdAsync(params.id))
     }, [dispatch, params.id]);
     return (
         <div className="bg-white">
