@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {addToCart, deleteItem, fetchCount, fetchItemsByUserId, resetCart, updateCart} from './cartAPI';
+import {addToCart, deleteItem, fetchItemsByUserId, resetCart, updateCart} from './cartAPI';
 
 const initialState = {
     items: [], status: 'idle',
@@ -9,8 +9,8 @@ export const addToCartAsync = createAsyncThunk('cart/addToCart', async (item) =>
     const response = await addToCart(item);
     return response.data;
 });
-export const fetchItemsByUserIdAsync = createAsyncThunk('cart/fetchItemsByUserId', async (userId) => {
-    const response = await fetchItemsByUserId(userId);
+export const fetchItemsByUserIdAsync = createAsyncThunk('cart/fetchItemsByUserId', async () => {
+    const response = await fetchItemsByUserId();
     return response.data;
 });
 export const updateItemAsync = createAsyncThunk('cart/updateCart', async (update) => {
@@ -21,8 +21,8 @@ export const deleteItemFromCartAsync = createAsyncThunk('cart/deleteItem', async
     const response = await deleteItem(itemId);
     return response.data;
 });
-export const resetCartAsync = createAsyncThunk('cart/resetCart', async (userId) => {
-    const response = await resetCart(userId);
+export const resetCartAsync = createAsyncThunk('cart/resetCart', async () => {
+    const response = await resetCart();
     return response.data;
 });
 

@@ -12,7 +12,8 @@ export default function Signup() {
     const user = useSelector(selectLoggedInUser)
     return (<>
         {user && <Navigate to='/' replace={true}></Navigate>}
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div
+            className="flex mt-40  bg-white/20 backdrop-blur-lg min-h-full w-auto flex-1 flex-col border-4 justify-center px-6 py-12 lg:px-8 max-w-3xl m-auto border-none  shadow-xl rounded-md">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img
                     className="mx-auto h-10 w-auto"

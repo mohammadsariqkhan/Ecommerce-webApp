@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchAllProductByIdAsync, selectProductById} from "../../product-list/productSlice";
 import {useNavigate, useParams} from "react-router-dom";
 import {addToCartAsync} from "../../cart/cartSlice";
-import {selectLoggedInUser} from "../../auth/authSlice";
 
 
 const colors = [
@@ -40,14 +39,13 @@ export default function AdminProductDetail() {
     const product = useSelector(selectProductById)
     const params = useParams()
     const dispatch = useDispatch()
-    const user = useSelector(selectLoggedInUser)
     const navigate = useNavigate()
 
 
     const handleCart = (e) => {
         e.preventDefault();
         navigate('/cart')
-        const newItem = {...product, quantity: 1, user: user.id}
+        const newItem = {...product, quantity: 1}
         delete newItem['id']
         dispatch(addToCartAsync(newItem))
 

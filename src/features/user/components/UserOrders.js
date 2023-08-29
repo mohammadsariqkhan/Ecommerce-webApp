@@ -1,20 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {fetchLoggedInUserOrderAsync, selectUserInfo, selectUserOrders} from '../userSlice';
-import {selectLoggedInUser} from '../../auth/authSlice';
 
 export default function UserOrders() {
     const dispatch = useDispatch();
-    const user = useSelector(selectUserInfo);
+    const userInfo = useSelector(selectUserInfo);
     const orders = useSelector(selectUserOrders);
 
     useEffect(() => {
-        dispatch(fetchLoggedInUserOrderAsync(user.id));
-    }, []);
+        dispatch(fetchLoggedInUserOrderAsync());
+    }, [dispatch]);
 
     return (
         <div>
-            {orders.map((order) => (
+            {orders && orders.map((order) => (
                 <div>
 
                     <div>
@@ -121,6 +120,7 @@ export default function UserOrders() {
                 </div>
 
             ))}
+            {/*    adding loadder here*/}
         </div>
     );
 }

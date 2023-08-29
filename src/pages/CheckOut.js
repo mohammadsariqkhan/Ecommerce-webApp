@@ -3,8 +3,8 @@ import {Link, Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteItemFromCartAsync, selectItems, updateItemAsync} from "../features/cart/cartSlice";
 import {useForm} from "react-hook-form";
-import {selectLoggedInUser, updateUserAsync} from "../features/auth/authSlice";
 import {createOrderAsync, selectCurrentOrder} from "../features/order/orderSlice";
+import {selectUserInfo, updateUserAsync} from "../features/user/userSlice";
 
 const CheckOut = () => {
     const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const CheckOut = () => {
     const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0)
     const totalItems = items.reduce((total, item) => item.quantity + total, 0)
     const {handleSubmit, register, formState: {errors}, reset} = useForm();
-    const user = useSelector(selectLoggedInUser)
+    const user = useSelector(selectUserInfo)
     const [selectedAddress, setSelectedAddress] = useState(null)
     const [paymentMethod, setPaymentMethod] = useState("cash")
     const currentOrder = useSelector(selectCurrentOrder)
@@ -223,7 +223,7 @@ const CheckOut = () => {
                                 <p className="mt-1 text-sm leading-6 text-gray-600">
                                     Choose from Existing Address
                                 </p>
-                                <ul role="list">
+                                <ul>
                                     {user.addresses.map((address, index) => (<li
                                         key={index}
                                         className="flex justify-between gap-x-6 py-5"

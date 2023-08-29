@@ -482,6 +482,7 @@ function Pagination({page, setPage, handlePage, totalItems}) {
                         {Array.from({length: totalPages}).map(
                             (el, index) => (
                                 <div
+                                    key={index}
                                     onClick={(e) => handlePage(index + 1)}
                                     href="#"
                                     aria-current="page"

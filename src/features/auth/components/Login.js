@@ -12,9 +12,11 @@ export default function Login() {
     const user = useSelector(selectLoggedInUser)
     const {handleSubmit, register, formState: {errors}} = useForm();
 
-    return (<>
+    return (<div>
         {user && <Navigate to='/' replace={true}></Navigate>}
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+
+        <div
+            className="flex mt-40  bg-white/20 backdrop-blur-lg min-h-full w-auto flex-1 flex-col border-4 justify-center px-6 py-12 lg:px-8 max-w-3xl m-auto border-none  shadow-xl rounded-md">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img
                     className="mx-auto h-10 w-auto"
@@ -48,7 +50,7 @@ export default function Login() {
 
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
-                            <p className="text-red-500">{errors?.message}</p>
+                            {error && <p className="text-red-500">{errors || error.message}</p>}
                         </div>
                     </div>
 
@@ -71,7 +73,7 @@ export default function Login() {
                                     required: "password is required",
                                 })}
                                 type="password"
-                         
+
 
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
@@ -100,5 +102,6 @@ export default function Login() {
                 </p>
             </div>
         </div>
-    </>);
+
+    </div>);
 }

@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchProductByIdAsync, selectProductById} from "../productSlice";
 import {useNavigate, useParams} from "react-router-dom";
 import {addToCartAsync} from "../../cart/cartSlice";
-import {selectLoggedInUser} from "../../auth/authSlice";
 
 
 const colors = [
@@ -40,14 +39,13 @@ export default function ProductDetail() {
     const product = useSelector(selectProductById)
     const params = useParams()
     const dispatch = useDispatch()
-    const user = useSelector(selectLoggedInUser)
     const navigate = useNavigate()
 
 
     const handleCart = (e) => {
         e.preventDefault();
         navigate('/cart')
-        const newItem = {...product, quantity: 1, user: user.id}
+        const newItem = {...product, quantity: 1}
         dispatch(addToCartAsync(newItem))
 
     }
@@ -56,6 +54,7 @@ export default function ProductDetail() {
     }, [dispatch, params.id]);
     return (
         <div className="bg-white">
+            {/*/!*adding loader here*!////////////////////////////////////*/}
             {product && (<div className="pt-6">
                 <nav aria-label="Breadcrumb">
                     <ol

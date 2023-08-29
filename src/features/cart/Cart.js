@@ -12,7 +12,6 @@ export default function Cart() {
     const totalItems = items.reduce((total, item) => item.quantity + total, 0)
     const handleQuantity = (e, item) => {
         //////////////////////////////////////////////////...item
-
         dispatch(updateItemAsync({id: item.id, quantity: +e.target.value}))
     }
     const handleRemove = (e, id) => {
